@@ -1,0 +1,61 @@
+#include <iostream>
+#include <iomanip>
+
+using namespace std;
+
+double f(double x) {
+	return 1 - exp(-x);
+}
+
+int main() {
+	
+	double n = 4, a = 0, b = 4, h = (b - a) / n, S1 = 0, S2 = 0, S3 = 0;
+
+	for (int i = 0; i < n + 1; i++) {
+		if (i == 0)
+			S1 += f(a);
+		else if (i == n)
+			S1 += f(b);
+		else if(i % 2 == 1)
+			S1 += 4 * f(a + i * h);
+		else
+			S1 += 2 * f(a + i * h);
+	}
+	S1 = S1 * h / 3;
+	cout << fixed << setprecision(8) << "\nS1: " << S1 << endl;
+
+	n = n * 2; h = (b - a) / n;
+
+	for (int i = 0; i < n + 1; i++) {
+		if (i == 0)
+			S2 += f(a);
+		else if (i == n)
+			S2 += f(b);
+		else if (i % 2 == 1)
+			S2 += 4 * f(a + i * h);
+		else
+			S2 += 2 * f(a + i * h);
+	}
+	S2 = S2 * h / 3;
+	cout << fixed << setprecision(8) << "\nS2: " << S2 << endl;
+
+	n = n * 2; h = (b - a) / n;
+
+	for (int i = 0; i < n + 1; i++) {
+		if (i == 0)
+			S3 += f(a);
+		else if (i == n)
+			S3 += f(b);
+		else if (i % 2 == 1)
+			S3 += 4 * f(a + i * h);
+		else
+			S3 += 2 * f(a + i * h);
+	}
+	S3 = S3 * h / 3;
+	cout << fixed << setprecision(8) << "\nS3: " << S3 << endl;
+
+	cout << "\nQC: " << (S2 - S1) / (S3 - S2) << endl;
+	cout << "\nErro: " << (S3 - S2) / 3 << endl;
+
+	return 0;
+}
