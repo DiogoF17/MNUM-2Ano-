@@ -1,0 +1,31 @@
+#include <iostream>
+
+//expressao resultante 1 de f(x): 2*pow(x,2)-5*x-2
+/*double exp(double x) { return 0.4*pow(x,2)-0.4; }
+
+int main() {
+	double x;
+	std::cout << "Guess: ", std::cin >> x;
+	for (int i = 0; i < 20; i++) {
+		x = exp(x);
+		std::cout << "\nx: " << x;
+	}
+
+	return 0;
+}*/
+
+//expressao resultante 2 de f(x): 2*pow(x,2)-5*x-2
+/*double exp(double x) { return sqrt(2.5*x+1); }
+
+int main() {
+	double x;
+	std::cout << "Guess: ", std::cin >> x;
+	for (int i = 0; i < 20; i++) {
+		x = exp(x);
+		std::cout << "\nx: " << x;
+	}
+
+	return 0;
+}*/
+
+//falta para as outras duas expressoes

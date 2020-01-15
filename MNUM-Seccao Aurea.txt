@@ -1,0 +1,103 @@
+#include <iostream>
+#include <iomanip>
+
+using namespace std;
+
+double pi = 3.14159265358979323846;
+
+double f(double x) {
+	return sin(x);
+}
+
+int main() {
+
+	//---------------------PESQUISA-----------------------
+	double guess = 2, h = 0.1, x1, x2, x3, y2, y3;
+	x1 = guess;
+	if (f(x1) < f(1 + h))
+		h = -h;
+	x2 = x1 + h; x3 = x2 + h;
+	y3 = f(x3); y2 = f(x2);
+	while (y3 < y2) {
+		x1 = x2; x2 = x3; x3 = x2 + h;
+		y2 = f(x2); y3 = f(x3);
+	}
+	cout << fixed << setprecision(8) << "\t\tMETODO DE PESQUISA" << "\n\nx1: " << x1 << "\nx2: " << x2 << "\nx3: " << x3 << "\ny2: " << y2 << "\ny3: " << y3;
+
+	//----------------------------------METODO DOS TERCOS---------
+	
+	double x4 = x3, B = (sqrt(5)-1)/2, prop = (x1 - x4)*B;
+	x2 = x4 - prop; x3 = prop+x1;
+	while (abs(x4 - x1) > 0.0001) {
+		if (f(x2) > f(x3)) {
+			x1 = x2;
+			x2 = x4 - ((x4 - x1) * B);
+		}
+		else {
+			x4 = x3;
+			x3 = x1 + (x4 - x1) * B;
+		}
+	}
+
+	if (x1 == x2)
+		x1 = x2; x2 = x3; x3 = x4;
+
+	cout << fixed << setprecision(8) << "\n\n\t\tMETODO DOS TERCOS" << "\n\nx1: " << x1 << "\nx2: " << x2 << "\nx3: " << x3 << "\nx4: " << x4;
+	
+	x1 = x2 + (x2 - x1) * (f(x1) - f(x2)) / (2 * (f(x3) - 2 * f(x2) + f(x1)));
+
+	cout << "\n\nMin: " << x1 << "\nImg: " << f(x1) << endl;
+
+	return 0;
+}
+
+
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+#include <iostream>
+#include <cmath>
+#include <iomanip>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+double B = (sqrt(5) - 1) / 2, A = pow(B,2);
+
+double f(double x) {
+	return pow((2 * x + 1), 2) - 5 * cos(10*x);
+}
+
+int main() {
+	double x1 = -1, x2 = 0, x3, x4;
+	cout << "\n\t\tMINIMO\n";
+	do {
+		x3 = x1 + A * (x2 - x1);
+		x4 = x1 + B * (x2 - x1);
+		if (f(x3) < f(x4))
+			x2 = x4;
+		else
+			x1 = x3;
+	} while (abs(x1 - x2) > 0.001);
+	vector<double> v;
+	v.push_back(x1); v.push_back(x2); v.push_back(x3); v.push_back(x4);
+	sort(v.begin(), v.end());
+	cout << "\nMin: " << v[0] << endl;
+	x1 = -1, x2 = 0;
+
+	cout << "\n\t\tMAXIMO\n";
+	do {
+		x3 = x1 + A * (x2 - x1);
+		x4 = x1 + B * (x2 - x1);
+		if (f(x3) > f(x4))
+			x2 = x4;
+		else
+			x1 = x3;
+	} while (abs(x1 - x2) > 0.001);
+	vector<double> a;
+	a.push_back(x1); a.push_back(x2); a.push_back(x3); a.push_back(x4);
+	sort(a.begin(), a.end());
+	cout << "\nMax: " << a[3] << endl;
+
+	return 0;
+}

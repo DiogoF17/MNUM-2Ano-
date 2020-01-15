@@ -1,0 +1,64 @@
+#include <iostream>
+#include <iomanip>
+
+using namespace std;
+
+double f(double x, double y) {
+	return pow(x, 2) + pow(y, 2);
+}
+
+int main() {
+	double xant, yant, x = 0, y = 0, h = 0.0125, S, d1, d2, d3, d4, S1, S2, S3;  //S1
+
+	while (x < 1.39999999) {
+		xant = x; yant = y;
+		d1 = h * f(xant, yant);
+		d2 = h * f(xant + (h / 2), yant + (d1 / 2));
+		d3 = h * f(xant + (h / 2), yant + (d2 / 2));
+		d4 = h * f(xant + h, yant + d3);
+		x = xant + h;
+		y = yant + d1/6 + d2/3 + d3/3 + d4/6;
+	}
+
+	S1 = y;
+
+	cout << fixed << setprecision(8) << "\n\nS1: " << y << endl;
+
+	x = 0, y = 0, h = h / 2; //S2
+
+	while (x < 1.399999) {
+		xant = x; yant = y;
+		d1 = h * f(xant, yant);
+		d2 = h * f(xant + (h / 2), yant + (d1 / 2));
+		d3 = h * f(xant + (h / 2), yant + (d2 / 2));
+		d4 = h * f(xant + h, yant + d3);
+		x = xant + h;
+		y = yant + d1 / 6 + d2 / 3 + d3 / 3 + d4 / 6;
+	}
+
+	S2 = y;
+
+	cout << fixed << setprecision(8) << "\n\nS2: " << y << endl;
+
+	x = 0, y = 0, h =h / 2;//S3
+
+	while (x < 1.3999999) {
+		xant = x; yant = y;
+		d1 = h * f(xant, yant);
+		d2 = h * f(xant + (h / 2), yant + (d1 / 2));
+		d3 = h * f(xant + (h / 2), yant + (d2 / 2));
+		d4 = h * f(xant + h, yant + d3);
+		x = xant + h;
+		y = yant + d1 / 6 + d2 / 3 + d3 / 3 + d4 / 6;
+	}
+
+	S3 = y;
+
+	cout << fixed << setprecision(8) << "\n\nS3: " << y << endl;
+
+	cout << fixed << setprecision(8) << "\nQC: " << (S2 - S1) / (S3 - S2) << endl;
+
+	cout << fixed << setprecision(8) << "\nErro: " << (S3 - S2) / 15 << endl;
+
+	return 0;
+}

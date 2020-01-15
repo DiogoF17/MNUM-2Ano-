@@ -1,0 +1,22 @@
+#include <iostream>
+#include <cmath>
+
+using namespace std;
+
+//Metodo de Euler
+
+double f(double x, double y) { return pow(x, 2) + pow(y, 2); }
+
+int main() {
+	//double x = 0, y = 0, xant, yant, h = (0.05 / 2);  S2
+	//double x = 0, y = 0, xant, yant, h = (0.1 / 2);  S1
+	double x = 0, y = 0, xant, yant, h = 0.1;  //S
+	while (x < 1.39) {
+		xant = x; yant = y;
+		x = xant + h;
+		y = yant + h * f(xant, yant);
+		cout << "\nx: " << x << "\ny: " << y;
+	}
+	cout << "\n\nS: " << y << endl;
+	return 0;
+}

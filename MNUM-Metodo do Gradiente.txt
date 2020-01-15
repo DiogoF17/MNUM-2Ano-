@@ -1,0 +1,45 @@
+#include <iostream>
+#include <cmath>
+#include <iomanip>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+double B = (sqrt(5) - 1) / 2, A = pow(B,2);
+
+double f(double x, double y) {
+	return pow(y, 2) - 2 * x * y - 6 * y + 2 * pow(x, 2) + 12;
+}
+
+double fx(double x, double y) {
+	return -2*y+4*x;
+}
+
+double fy(double x, double y) {
+	return 2 * y - 2 * x - 6;
+}
+
+int main() {
+	double x = 1, y = 1, xant, yant, h = 1;
+	bool repete;
+	int cont = 0;
+	do {
+		xant = x; yant = y;
+		x = xant - h * fx(xant, yant);
+		y = yant - h * fy(xant, yant);
+		if (f(x, y) < f(xant, yant)) {
+			h *= 2;
+			repete = false;
+		}
+		else if (f(x, y) > f(xant, yant)) {
+			x = xant; y = yant;
+			h /= 2;
+			repete = true;
+		}
+		cont++;
+	} while ((abs(x - xant) > 0.01 && abs(y - yant) > 0.01) || repete);
+
+	cout << fixed << setprecision(8) << "\nx: " << x << endl << "y: " << y << "\nf(x,y): " << f(x,y) << endl << "\nIteracoes: " << cont << endl;
+	return 0;
+}

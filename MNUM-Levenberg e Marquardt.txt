@@ -1,0 +1,43 @@
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+
+using namespace std;
+
+double fx(double x, double y) {
+	return ((2 * y - 2 * x - 6) / 2.0) + ((4 * x - 2 * y) / 2.0);
+}
+
+double fy(double x, double y) {
+	return ((4 * x - 2 * y) / 2.0) + 2*y -2*x-6;
+}
+
+double gx(double x, double y) {
+	return -2 * y + 4 * x;
+}
+
+double gy(double x, double y) {
+	return 2 * y - 2 * x - 6;
+}
+
+double f(double x, double y) {
+	return pow(y, 2)- 2*x*y-6*y+2*pow(x, 2) + 12;
+}
+
+int main() {
+	double x = 1, y = 1, xant, yant, l = 1;
+	int cont = 40;
+	do{
+		xant = x; yant = y;
+		x = xant - fx(xant, yant) - l*gx(xant, yant);
+		y = yant - fy(xant, yant) - l *gy(xant, yant);
+		if (f(xant, yant) > f(x, y))
+			l += l / 2;
+		else
+			l -= l / 2;
+		cont--;
+		cout << fixed << setprecision(5) << "\nx: " << x << "\ny: " << y << endl;
+		cout << fixed << setprecision(5) << "f(x, y): " << f(x, y) << endl;
+	} while(cont != 0);
+	return 0;
+}

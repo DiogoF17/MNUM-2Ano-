@@ -1,0 +1,93 @@
+#include <iostream>
+#include <iomanip>
+
+using namespace std;
+
+double f(double x, double y, double z) {
+	return z;
+}
+
+double g(double x, double y, double z) {
+	return x-3*z-2*y;
+}
+
+int main() {
+	double xant, yant, zant, x = 0, y = 0, z = 0, h = 0.05/2, S, dy1, dy2, dy3, dy4, dz1, dz2, dz3, dz4, Sy1, Sy2, Sy3, Sz1, Sz2, Sz3;  //S1
+
+	while (x < 0.49) {
+		xant = x; yant = y; zant = z;
+		dy1 = h * f(xant, yant, zant);
+		dz1 = h * g(xant, yant, zant);
+		dy2 = h * f(xant + (h / 2), yant + (dy1 / 2), zant + dz1/2);
+		dz2 = h * g(xant + (h / 2), yant + dy1 / 2, zant + (dz1 / 2));
+		dy3 = h * f(xant + (h / 2), yant + (dy2 / 2), zant + dz2/2);
+		dz3 = h * g(xant + (h / 2), yant + dy2 / 2, zant + (dz2 / 2));
+		dy4 = h * f(xant + h, yant + dy3, zant + dz3);
+		dz4 = h * g(xant + h, yant + dy3, zant + dz3);
+		x = xant + h;
+		y = yant + dy1/6 + dy2/3 + dy3/3 + dy4/6;
+		z = zant + dz1 / 6 + dz2 / 3 + dz3 / 3 + dz4 / 6;
+		cout << "\nx: " << x;
+	}
+
+	Sy1 = y;
+	Sz1 = z;
+
+	cout << fixed << setprecision(8) << "\n\nSy1: " << Sy1 << "\nSz1: " << Sz1 << endl;
+
+	x = 0, y = 0, z = 0, h = h / 2; //S2
+
+	while (x < 0.5) {
+		xant = x; yant = y; zant = z;
+		dy1 = h * f(xant, yant, zant);
+		dz1 = h * g(xant, yant, zant);
+		dy2 = h * f(xant + (h / 2), yant + (dy1 / 2), zant + dz1 / 2);
+		dz2 = h * g(xant + (h / 2), yant + dy1 / 2, zant + (dz1 / 2));
+		dy3 = h * f(xant + (h / 2), yant + (dy2 / 2), zant + dz2 / 2);
+		dz3 = h * g(xant + (h / 2), yant + dy2 / 2, zant + (dz2 / 2));
+		dy4 = h * f(xant + h, yant + dy3, zant + dz3);
+		dz4 = h * g(xant + h, yant + dy3, zant + dz3);
+		x = xant + h;
+		y = yant + dy1 / 6 + dy2 / 3 + dy3 / 3 + dy4 / 6;
+		z = zant + dz1 / 6 + dz2 / 3 + dz3 / 3 + dz4 / 6;
+		cout << "\nx: " << x;
+	}
+
+	Sy2 = y;
+	Sz2 = z;
+
+	cout << fixed << setprecision(8) << "\n\nSy2: " << Sy2 << "\nSz2: " << Sz2 << endl;
+
+	x = 0, y = 0, z = 0, h = h / 2;//S3
+
+	while (x < 0.499) {
+		xant = x; yant = y; zant = z;
+		dy1 = h * f(xant, yant, zant);
+		dz1 = h * g(xant, yant, zant);
+		dy2 = h * f(xant + (h / 2), yant + (dy1 / 2), zant + dz1 / 2);
+		dz2 = h * g(xant + (h / 2), yant + dy1 / 2, zant + (dz1 / 2));
+		dy3 = h * f(xant + (h / 2), yant + (dy2 / 2), zant + dz2 / 2);
+		dz3 = h * g(xant + (h / 2), yant + dy2 / 2, zant + (dz2 / 2));
+		dy4 = h * f(xant + h, yant + dy3, zant + dz3);
+		dz4 = h * g(xant + h, yant + dy3, zant + dz3);
+		x = xant + h;
+		y = yant + dy1 / 6 + dy2 / 3 + dy3 / 3 + dy4 / 6;
+		z = zant + dz1 / 6 + dz2 / 3 + dz3 / 3 + dz4 / 6;
+		cout << "\nx: " << x;
+	}
+
+	Sy3 = y;
+	Sz3 = z;
+
+	cout << fixed << setprecision(8) << "\n\nSy3: " << Sy3 << "\nSz3: " << Sz3;
+
+	cout << fixed << setprecision(8) << "\n\nQCy: " << (Sy2 - Sy1) / (Sy3 - Sy2) << endl;
+
+	cout << fixed << setprecision(8) << "\nErroy: " << (Sy3 - Sy2) / 15 << endl;
+
+	cout << fixed << setprecision(8) << "\nQCz: " << (Sz2 - Sz1) / (Sz3 - Sz2) << endl;
+
+	cout << fixed << setprecision(8) << "\nErroz: " << (Sz3 - Sz2) / 15 << endl;
+
+	return 0;
+}

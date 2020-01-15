@@ -1,0 +1,32 @@
+#include <iostream>
+
+float f(float x) {
+	return -2.75 * pow(x, 3) + 18 * pow(x, 2) - 21 * x - 12;
+}
+
+int main() {
+	
+	int cont = 0;
+	float a = 4, b = 7, m;
+	while (abs(a - b) > 0.00001) {
+		cont++;
+		m = (a + b) / 2;
+		if (f(a) * f(m) < 0)
+			b = m;
+		else
+			a = m;
+	}
+
+	std::cout << "Num It: " << cont;
+	std::cout << "\na = " << a;
+	std::cout << "\nb = " << b;
+	std::cout << "\nf(a) = " << f(a);
+	std::cout << "\nf(b) = " << f(b);
+	std::cout << "\nRaiz: ";
+	if (abs(f(a)) < abs(f(b)))
+		std::cout << a;
+	else
+		std::cout << b;
+
+	return 0;
+}

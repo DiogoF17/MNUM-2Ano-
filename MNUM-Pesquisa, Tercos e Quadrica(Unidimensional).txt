@@ -1,0 +1,51 @@
+#include <iostream>
+#include <iomanip>
+
+using namespace std;
+
+double pi = 3.14159265358979323846;
+
+double f(double x) {
+	return sin(x);
+}
+
+int main() {
+
+	//---------------------PESQUISA-----------------------
+	double guess = 2, h = 0.1, x1, x2, x3, y2, y3;
+	x1 = guess;
+	if (f(x1) < f(1 + h))
+		h = -h;
+	x2 = x1 + h; x3 = x2 + h;
+	y3 = f(x3); y2 = f(x2);
+	while (y3 < y2) {
+		x1 = x2; x2 = x3; x3 = x2 + h;
+		y2 = f(x2); y3 = f(x3);
+	}
+	cout << fixed << setprecision(8) << "\t\tMETODO DE PESQUISA" << "\n\nx1: " << x1 << "\nx2: " << x2 << "\nx3: " << x3 << "\ny2: " << y2 << "\ny3: " << y3;
+
+	//----------------------------------METODO DOS TERCOS---------
+	
+	double x4 = x3;
+	int cnt = 10;
+	x2 = x1 + ((x4 - x1) / 3); x3 = x1 + 2*((x4 - x1) / 3);
+	while (abs(x4 - x1) > 0.0001) {
+		if (f(x2) < f(x3))
+			x4 = x3;
+		else
+			x1 = x2;
+		x2 = x1 + ((x4 - x1) / 3); x3 = x1 + 2 * ((x4 - x1) / 3);
+		cnt--;
+	}
+
+	if (x1 == x2)
+		x1 = x2; x2 = x3; x3 = x4;
+
+	cout << fixed << setprecision(8) << "\n\n\t\tMETODO DOS TERCOS" << "\n\nx1: " << x1 << "\nx2: " << x2 << "\nx3: " << x3 << "\nx4: " << x4;
+	
+	x1 = x2 + (x2 - x1) * (f(x1) - f(x2)) / (2 * (f(x3) - 2 * f(x2) + f(x1)));
+
+	cout << "\n\nMin: " << x1 << "\nImg: " << f(x1) << endl;
+
+	return 0;
+}

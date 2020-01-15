@@ -1,0 +1,15 @@
+#include <iostream>
+
+//expressao resultante da divisao da funcao pela derivate f(x): 2*pow(x,2)-5*x-2
+double exp(double x) { return (2*pow(x,2)-5*x-2)/(4*x-5); }
+
+int main() {
+	double x;
+	std::cout << "Guess: ", std::cin >> x;
+	for (int i = 0; i < 20; i++) {
+		x = x - exp(x);
+		std::cout << "\nx: " << x;
+	}
+
+	return 0;
+}

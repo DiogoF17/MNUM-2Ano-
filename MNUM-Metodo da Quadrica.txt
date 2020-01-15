@@ -1,0 +1,31 @@
+#include <iostream>
+#include <iomanip>
+#include <cmath>
+
+using namespace std;
+
+double fx(double x, double y) {
+	return (x / 2 - sin(x)) / ((1 / 2.0) - cos(x));
+}
+
+double fy(double x, double y) {
+	return (cos(y) + y / 2) / ((1/2.0) - sin(y));
+}
+
+double f(double x, double y) {
+	return sin(y) + (pow(y, 2) / 4) + cos(x) + pow(x, 2) / 4 - 1;
+}
+
+int main() {
+	double x = 0, y = 0, xant, yant;
+	int cont = 4;
+	while (cont != 0) {
+		xant = x; yant = y;
+		x = xant - fx(xant, yant);
+		y = yant - fy(xant, yant);
+		cont--;
+		cout << fixed << setprecision(5) << "\nx: " << x << "\ny: " << y << endl;
+	}
+	cout << fixed << setprecision(5) << "f(x, y): " << f(x, y) << endl;
+	return 0;
+}
