@@ -6,4 +6,4 @@ Nota 2ºTeste: 17.8
 
 Nota Exame: 18.5
 
-Nota Final: 19
+Nota Final: 19 (mas fiquei com 18 pois nao fiz a defesa oral)
